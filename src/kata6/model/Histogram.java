@@ -12,7 +12,7 @@ import java.util.*;
  * @author amct2
  */
 public class Histogram <T>{
-    HashMap <T, Integer> histogram;
+    private final HashMap <T, Integer> histogram;
     public Histogram(){
         histogram = new HashMap<>();
     }

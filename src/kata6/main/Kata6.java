@@ -6,9 +6,10 @@
 package kata6.main;
 
 import kata6.model.Histogram;
-import kata6.view.MailHistogramBuilder;
+import kata6.view.HistogramBuilder;
 import kata6.view.HistogramDisplay;
 import java.util.*;
+import kata6.model.Mail;
 import static kata6.view.MailListReader.read;
 
 /**
@@ -27,8 +28,13 @@ public class Kata6 {
         
     }
     
-    Histogram <String> histograma = new Histogram();
-    HistogramDisplay histo;
+    HistogramBuilder <Mail> builder;
+    Histogram <Character> letters;
+    Histogram <String>  domains;
+    
+    List listMail;
+    String FILENAME = "C:\\Users\\amct2\\Desktop\\asdad\\IS2\\Kata6\\emails.txt";
+    
     
     private void execute(){
         input();
@@ -37,17 +43,33 @@ public class Kata6 {
     }
     
     private void input(){
-      String FILENAME = "C:\\Users\\amct2\\Desktop\\asdad\\IS2\\Kata4\\dominios.txt";
-      histograma = MailHistogramBuilder.build(read(FILENAME));
+    listMail = read(FILENAME);
+    builder = new HistogramBuilder<>(listMail);
       
     }
     
     private void output(){
-        histo.execute();
+        new HistogramDisplay(domains, "Dominios").execute();
+        new HistogramDisplay(letters, "Primer Caracter").execute();
     }
     
     private void process(){
-        histo = new HistogramDisplay(histograma);
+        
+        domains = builder.build(new Attribute <Mail, String>(){
+            @Override
+            public String get(Mail item){
+                return item.getMail().split("@")[1];
+            }
+        });
+        
+        
+        letters = builder.build(new Attribute <Mail, Character>(){
+            @Override
+            public Character get(Mail item){
+                return item.getMail().charAt(0);
+            }
+        });
+        
     }
     
 }

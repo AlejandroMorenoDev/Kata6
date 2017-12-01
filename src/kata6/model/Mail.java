@@ -11,18 +11,21 @@ package kata6.model;
  */
 public class Mail {
     private String mail;
+    private int id;
     
-    
-    public Mail(String mail){
+    public Mail(String mail, int id){
         this.mail = mail;
+        this.id = id;
     }
     
-    public String getDomain(){
-        String [] domain = mail.split("@");
-        if(domain.length > 2 || domain.length == 1){
-            return "";
-        }
-        return domain[1];
+    public int getid(){
+        return this.id;
     }
+    
+    public String getMail(){
+        return this.mail;
+    }
+    
+    
     
 }

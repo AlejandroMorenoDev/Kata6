@@ -22,6 +22,7 @@ public class MailListReader {
     public static ArrayList <Mail> read(String fileName){
         FileReader fl = null;
         BufferedReader bf = null;
+        int id = 0;
                 
         ArrayList <Mail> emails = new ArrayList<>();
         
@@ -30,7 +31,7 @@ public class MailListReader {
             bf = new BufferedReader(fl);
             String currentLine;
             while((currentLine = bf.readLine()) != null){
-                Mail m = new Mail(currentLine);
+                Mail m = new Mail(currentLine, id);
                 emails.add(m);
             }
         }catch (IOException e){
